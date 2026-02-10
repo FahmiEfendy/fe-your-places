@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# 📍 Your Places – Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <img width="762" height="384" alt="Screenshot" src="https://github.com/user-attachments/assets/be4226cf-f4d6-4521-866c-bfc4f85ec41f" />
+</p>
 
-## Available Scripts
+Frontend application for **Your Places**, a web platform where users can explore and share their favorite places. 
+This application allows users to browse places, view place details, and manage their own places through a smooth and interactive user interface.
 
-In the project directory, you can run:
 
-### `npm start`
+## ✨ Features
+- User authentication (login & signup)
+- Browse all shared places
+- View places by user
+- Create, update, and delete places
+- Image preview and animations
+- Protected routes for authenticated users
+- Client-side routing
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🌐 Live API
+Base URL: [https://yourplaces-front.vercel.app](https://yourplaces-front.vercel.app)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Tech Stack
+- Language: JavaScript
+- Framework: React 18 (Create React App)
+- Routing: React Router DOM v6
+- Authentication: Firebase (client-side)
+- Animations: react-transition-group
+- State Management: React Hooks
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 How to Run
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Requirements
+- Node.js (v16+ recommended)
+- npm
+- Backend API running (local or production)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Steps
+```bash
+https://github.com/FahmiEfendy/yourplaces--front.git # clone the repository
 
-### `npm run eject`
+cd yourplaces--front # access cloned repository
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm install # install dependency
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm start # start application
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+After running the command, the app will be available at: http://localhost:3000
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## ⚙️ Environment Configuration
+- Create a .env file in the root directory
+- Check .env.example for required environment keys
+- Make sure this URL points to the correct backend (local or production).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔗 Backend Integration
+This frontend consumes REST APIs provided by Your Places Backend, including:
+- User authentication
+- Places CRUD operations
+- Image upload handling
+Ensure the backend service is running before using the frontend.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🧠 Project Notes
+- Authentication state is managed on the client
+- Protected routes prevent unauthorized access
+- Animations improve user experience during route changes
+- Designed with reusable and modular components
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📬 Contact
+- Email: itsfahmiefendy@gmail.com
+- LinkedIn: https://www.linkedin.com/in/fahmi-efendy
