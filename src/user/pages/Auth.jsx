@@ -61,7 +61,9 @@ const Auth = () => {
     event.preventDefault();
 
     if (isLoginMode) {
-        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
+      try {
+        const apiBaseUrl =
+          import.meta.env.VITE_API_BASE_URL || "/your-places/api";
         const responseData = await sendRequest(
           `${apiBaseUrl}/users/login`,
           "POST",

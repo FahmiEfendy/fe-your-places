@@ -1,1 +1,0 @@
-import{a as e,d as t}from"./index-Bfb6hC0H.js";t();var n=e(),r=e=>(0,n.jsx)(`div`,{className:`card ${e.className}`,style:e.style,children:e.children});export{r as t};

@@ -43,7 +43,9 @@ const UpdatePlace = () => {
   // GET Place Detail
   useEffect(() => {
     const fetchRequest = async () => {
-        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
+      try {
+        const apiBaseUrl =
+          import.meta.env.VITE_API_BASE_URL || "/your-places/api";
         const responseData = await sendRequest(
           `${apiBaseUrl}/places/${placeId}`
         );
