@@ -15,8 +15,9 @@ const Users = () => {
   useEffect(() => {
     const fetchRequest = async () => {
       try {
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
         const responseData = await sendRequest(
-          `${import.meta.env.VITE_API_BASE_URL}/users`
+          `${apiBaseUrl}/users`
         );
         setUserList(responseData.data);
       } catch (err) {

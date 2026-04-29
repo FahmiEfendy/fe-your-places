@@ -30,8 +30,9 @@ const PlaceItem = (props) => {
 
   const confirmDeleteHandler = async () => {
     try {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
       await sendRequest(
-        `${import.meta.env.VITE_API_BASE_URL}/places/${props.id}`,
+        `${apiBaseUrl}/places/${props.id}`,
         "DELETE",
         {
           Authorization: `Bearer ${auth.userToken}`,

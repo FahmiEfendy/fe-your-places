@@ -51,8 +51,9 @@ const NewPlace = () => {
       formData.append("address", formState.inputs.address.value);
       formData.append("image", formState.inputs.image.value);
 
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
       await sendRequest(
-        `${import.meta.env.VITE_API_BASE_URL}/places/`,
+        `${apiBaseUrl}/places/`,
         "POST",
         { Authorization: `Bearer ${auth.userToken}` },
         formData
