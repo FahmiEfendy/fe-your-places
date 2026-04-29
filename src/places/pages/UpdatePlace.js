@@ -45,7 +45,7 @@ const UpdatePlace = () => {
     const fetchRequest = async () => {
       try {
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/places/${placeId}`
+          `${import.meta.env.VITE_API_BASE_URL}/places/${placeId}`
         );
 
         setSelectedPlace(responseData.data);
@@ -77,7 +77,7 @@ const UpdatePlace = () => {
 
     try {
       await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/places/${placeId}`,
+        `${import.meta.env.VITE_API_BASE_URL}/places/${placeId}`,
         "PATCH",
         {
           "Content-Type": "application/json",

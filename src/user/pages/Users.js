@@ -16,7 +16,7 @@ const Users = () => {
     const fetchRequest = async () => {
       try {
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/users`
+          `${import.meta.env.VITE_API_BASE_URL}/users`
         );
         setUserList(responseData.data);
       } catch (err) {

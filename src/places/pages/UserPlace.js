@@ -23,7 +23,7 @@ const UserPlace = () => {
     const fetchRequest = async () => {
       try {
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/places/user/${userId}`
+          `${import.meta.env.VITE_API_BASE_URL}/places/user/${userId}`
         );
 
         setUserPlaces(responseData.data.places);

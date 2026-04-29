@@ -52,7 +52,7 @@ const NewPlace = () => {
       formData.append("image", formState.inputs.image.value);
 
       await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/places/`,
+        `${import.meta.env.VITE_API_BASE_URL}/places/`,
         "POST",
         { Authorization: `Bearer ${auth.userToken}` },
         formData

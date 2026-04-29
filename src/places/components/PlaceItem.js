@@ -31,7 +31,7 @@ const PlaceItem = (props) => {
   const confirmDeleteHandler = async () => {
     try {
       await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/places/${props.id}`,
+        `${import.meta.env.VITE_API_BASE_URL}/places/${props.id}`,
         "DELETE",
         {
           Authorization: `Bearer ${auth.userToken}`,
