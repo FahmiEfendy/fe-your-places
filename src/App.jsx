@@ -24,7 +24,7 @@ function App() {
     <AuthContext.Provider
       value={{ isLogin: !!userToken, userId, userToken, login, logout }}
     >
-      <Router>
+      <Router basename="/your-places">
         <MainNavigation></MainNavigation>
         <main>
           <Suspense
@@ -40,14 +40,14 @@ function App() {
                 <Route path="/:userId/places" exact element={<UserPlace />} />
                 <Route path="/place/new" exact element={<NewPlace />} />
                 <Route path="/place/:placeId" exact element={<UpdatePlace />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
+                <Route path="*" element={<Navigate to="." replace />} />
               </Routes>
             ) : (
               <Routes>
                 <Route path="/" exact element={<Users />} />
                 <Route path="/:userId/places" exact element={<UserPlace />} />
                 <Route path="/auth" exact element={<Auth />} />
-                <Route path="*" element={<Navigate to="/auth" replace />} />
+                <Route path="*" element={<Navigate to="auth" replace />} />
               </Routes>
             )}
           </Suspense>
