@@ -62,8 +62,10 @@ const Auth = () => {
 
     if (isLoginMode) {
       try {
+        const apiBaseUrl =
+          import.meta.env.VITE_API_BASE_URL || "/your-places/api";
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/users/login`,
+          `${apiBaseUrl}/users/login`,
           "POST",
           {
             "Content-Type": "application/json",
@@ -87,8 +89,9 @@ const Auth = () => {
         formData.append("password", formState.inputs.password.value);
         formData.append("image", formState.inputs.image.value);
 
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/users/signup`,
+          `${apiBaseUrl}/users/signup`,
           "POST",
           {},
           formData

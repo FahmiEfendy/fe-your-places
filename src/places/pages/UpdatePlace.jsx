@@ -44,8 +44,10 @@ const UpdatePlace = () => {
   useEffect(() => {
     const fetchRequest = async () => {
       try {
+        const apiBaseUrl =
+          import.meta.env.VITE_API_BASE_URL || "/your-places/api";
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/places/${placeId}`
+          `${apiBaseUrl}/places/${placeId}`
         );
 
         setSelectedPlace(responseData.data);
@@ -76,8 +78,9 @@ const UpdatePlace = () => {
     event.preventDefault();
 
     try {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
       await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/places/${placeId}`,
+        `${apiBaseUrl}/places/${placeId}`,
         "PATCH",
         {
           "Content-Type": "application/json",

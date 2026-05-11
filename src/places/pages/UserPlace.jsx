@@ -22,8 +22,9 @@ const UserPlace = () => {
   useEffect(() => {
     const fetchRequest = async () => {
       try {
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/places/user/${userId}`
+          `${apiBaseUrl}/places/user/${userId}`
         );
 
         setUserPlaces(responseData.data.places);

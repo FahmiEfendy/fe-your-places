@@ -1,0 +1,1 @@
+.image-upload.center{flex-direction:column;justify-content:center;align-items:center;display:flex}.image-upload__preview{text-align:center;border:1px solid #ccc;justify-content:center;align-items:center;width:13rem;height:13rem;margin-bottom:1rem;display:flex}.image-upload__preview img{object-fit:cover;width:100%;height:100%}
