@@ -10,7 +10,11 @@ const useFetchImage = (imagePath) => {
     const openinaryBaseUrl =
       import.meta.env.VITE_OPENINARY_URL || "https://openinary.fahmiefendy.dev";
 
-    setImageUrl(`${openinaryBaseUrl}/uploads/${imagePath}`);
+    if (imagePath.startsWith("http")) {
+      setImageUrl(imagePath);
+    } else {
+      setImageUrl(`${openinaryBaseUrl}/${imagePath}`);
+    }
   }, [imagePath]);
 
   return { imageUrl };
