@@ -85,3 +85,38 @@
   }
 }
 
+.theme-toggle button {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-main) !important;
+  cursor: pointer;
+  padding: 0.5rem !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease !important;
+  margin: 0 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  box-shadow: none !important;
+}
+
+.theme-toggle button:hover {
+  background: var(--primary) !important;
+  color: white !important;
+  transform: rotate(15deg);
+}
+
+.theme-toggle svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+[data-theme="light"] .theme-toggle button {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: var(--text-main) !important;
+}
+
+
