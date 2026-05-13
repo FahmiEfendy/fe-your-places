@@ -18,6 +18,7 @@ import {
 const NewPlace = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  const [useImageUrl, setUseImageUrl] = React.useState(false);
   const { isLoading, error, sendRequest, clearErrorHandler } = useHttpRequest();
   const [formState, inputChangeHandler] = useForm(
     {
@@ -41,6 +42,12 @@ const NewPlace = () => {
     false
   );
 
+  const switchImageSourceHandler = () => {
+    setUseImageUrl((prev) => !prev);
+    // Reset image field when switching source
+    inputChangeHandler("image", useImageUrl ? null : "", false);
+  };
+
   const formSubmitHandler = async (event) => {
     event.preventDefault();
 
@@ -49,7 +56,11 @@ const NewPlace = () => {
       formData.append("title", formState.inputs.title.value);
       formData.append("description", formState.inputs.description.value);
       formData.append("address", formState.inputs.address.value);
-      formData.append("image", formState.inputs.image.value);
+      if (useImageUrl) {
+        formData.append("imageUrl", formState.inputs.image.value);
+      } else {
+        formData.append("image", formState.inputs.image.value);
+      }
 
       const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
       await sendRequest(
@@ -94,11 +105,29 @@ const NewPlace = () => {
           validators={[VALIDATOR_REQUIRE()]}
           onInput={inputChangeHandler}
         />
-        <ImageUpload
-          id="image"
-          onInput={inputChangeHandler}
-          errorText="Please upload an image."
-        />
+        <div className="image-source-toggle" style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
+          <Button type="button" inverse onClick={switchImageSourceHandler}>
+            {useImageUrl ? "USE UPLOAD" : "USE IMAGE URL"}
+          </Button>
+        </div>
+        {!useImageUrl ? (
+          <ImageUpload
+            id="image"
+            center
+            onInput={inputChangeHandler}
+            errorText="Please upload an image."
+          />
+        ) : (
+          <Input
+            id="image"
+            element="input"
+            type="text"
+            label="Image URL"
+            errorText="Please enter a valid image URL!"
+            validators={[VALIDATOR_REQUIRE()]}
+            onInput={inputChangeHandler}
+          />
+        )}
         <Button type="submit" disabled={!formState.isValid}>
           Add Place
         </Button>

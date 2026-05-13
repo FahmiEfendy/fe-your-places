@@ -18,13 +18,22 @@
 }
 
 .main-navigation__title {
-  color: white;
+  color: var(--text-main);
+  font-weight: 800;
+  letter-spacing: -1px;
+  font-size: 1.75rem;
 }
 
 .main-navigation__title a {
   text-decoration: none;
-  color: white;
+  color: var(--text-main);
+  transition: color 0.2s;
 }
+
+.main-navigation__title a:hover {
+  color: var(--primary);
+}
+
 
 .main-navigation__header-nav {
   display: none;

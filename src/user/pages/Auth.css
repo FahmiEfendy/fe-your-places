@@ -13,3 +13,10 @@
 .authentication form {
   margin-bottom: 1rem;
 }
+
+.image-source-toggle {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+

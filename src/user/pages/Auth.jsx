@@ -19,6 +19,7 @@ import {
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [useImageUrl, setUseImageUrl] = useState(false);
   const { isLoading, error, sendRequest, clearErrorHandler } = useHttpRequest();
 
   const auth = useContext(AuthContext);
@@ -55,6 +56,13 @@ const Auth = () => {
     }
 
     setIsLoginMode((prevState) => !prevState);
+    setUseImageUrl(false); // Reset to upload mode on toggle
+  };
+
+  const switchImageSourceHandler = () => {
+    setUseImageUrl((prev) => !prev);
+    // Reset image field when switching source
+    inputChangeHandler("image", useImageUrl ? null : "", false);
   };
 
   const formSubmitHandler = async (event) => {
@@ -87,7 +95,11 @@ const Auth = () => {
         formData.append("name", formState.inputs.name.value);
         formData.append("email", formState.inputs.email.value);
         formData.append("password", formState.inputs.password.value);
-        formData.append("image", formState.inputs.image.value);
+        if (useImageUrl) {
+          formData.append("imageUrl", formState.inputs.image.value);
+        } else {
+          formData.append("image", formState.inputs.image.value);
+        }
 
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
         const responseData = await sendRequest(
@@ -122,12 +134,29 @@ const Auth = () => {
                 validators={[VALIDATOR_REQUIRE]}
                 onInput={inputChangeHandler}
               />
-              <ImageUpload
-                center
-                id="image"
-                onInput={inputChangeHandler}
-                errorText="Please upload an image."
-              />
+              <div className="image-source-toggle">
+                <Button type="button" inverse onClick={switchImageSourceHandler}>
+                  {useImageUrl ? "USE UPLOAD" : "USE IMAGE URL"}
+                </Button>
+              </div>
+              {!useImageUrl ? (
+                <ImageUpload
+                  center
+                  id="image"
+                  onInput={inputChangeHandler}
+                  errorText="Please upload an image."
+                />
+              ) : (
+                <Input
+                  id="image"
+                  element="input"
+                  type="text"
+                  label="Image URL"
+                  errorText="Please enter a valid image URL!"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  onInput={inputChangeHandler}
+                />
+              )}
             </React.Fragment>
           )}
           <Input
@@ -142,8 +171,8 @@ const Auth = () => {
             id="password"
             type="password"
             label="Password"
-            errorText="Please enter a valid password with at least 8 characters!"
-            validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(8)]}
+            errorText="Please enter a valid password!"
+            validators={[VALIDATOR_REQUIRE()]}
             onInput={inputChangeHandler}
           />
           <Button type="submit" disabled={!formState.isValid}>

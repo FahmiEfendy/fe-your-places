@@ -1,32 +1,40 @@
 .modal {
   z-index: 100;
   position: fixed;
-  top: 22vh;
-  left: 10%;
-  width: 80%;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 8px;
+  top: 15vh;
+  left: 5%;
+  width: 90%;
+  background: var(--card-bg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
 }
 
 .modal__header {
   width: 100%;
-  padding: 1rem 0.5rem;
-  background: #2a006e;
-  color: white;
+  padding: 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-main);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal__header h2 {
-  margin: 0.5rem;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .modal__content {
-  padding: 1rem 0.5rem;
+  padding: 0;
 }
 
 .modal__footer {
-  padding: 1rem 0.5rem;
+  padding: 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 
 @media (min-width: 768px) {
   .modal {

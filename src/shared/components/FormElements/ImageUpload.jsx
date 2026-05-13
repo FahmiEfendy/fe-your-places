@@ -32,12 +32,18 @@ const ImageUpload = (props) => {
   };
 
   useEffect(() => {
-    if (!file) return;
+    if (!file) {
+      if (props.initialValue && typeof props.initialValue === "string") {
+        setPreviewFile(props.initialValue);
+        setIsValid(true);
+      }
+      return;
+    }
 
     const fileReader = new FileReader();
     fileReader.onload = () => setPreviewFile(fileReader.result);
     fileReader.readAsDataURL(file);
-  }, [file]);
+  }, [file, props.initialValue]);
 
   return (
     <div className="form-control">

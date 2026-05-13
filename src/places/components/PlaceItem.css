@@ -1,38 +1,79 @@
 .place-item {
-  margin: 1rem 0;
+  margin: 0;
 }
+
 
 .place-item__content {
   padding: 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .place-item__info {
-  padding: 1rem;
-  text-align: center;
+  padding: 1.5rem;
+  text-align: left;
 }
 
 .place-item__image {
   width: 100%;
-  height: 12.5rem;
-  margin-right: 1.5rem;
+  height: 15rem;
+  overflow: hidden;
 }
 
 .place-item__image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
-.place-item__info h2,
-.place-item__info h3,
+.place-item:hover .place-item__image img {
+  transform: scale(1.05);
+}
+
+.place-item__info h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+.place-item__info h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
 .place-item__info p {
-  margin: 0 0 0.5rem 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.modal-header__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header__title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+
+.modal-header__address {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-muted);
 }
 
 .place-item__actions {
-  padding: 1rem;
-  text-align: center;
-  border-top: 1px solid #ccc;
+
+  padding: 1.25rem;
+  text-align: right;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .place-item__modal-content {
@@ -41,20 +82,54 @@
 
 .place-item__modal-actions {
   text-align: right;
+  padding: 1rem;
+  background: var(--card-bg);
 }
 
 .place-item__actions button,
 .place-item__actions a {
-  margin: 0.5rem;
+  margin-left: 0.75rem;
 }
 
 .map-container {
-  height: 15rem;
+  height: 25rem;
   width: 100%;
+}
+
+.place-item__modal-details {
+  padding: 1.5rem 2rem;
+  background: var(--card-bg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-detail__item {
+  margin-bottom: 1.25rem;
+}
+
+.modal-detail__row {
+  display: flex;
+  gap: 2rem;
+}
+
+.modal-detail__label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.modal-detail__value {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-main);
+  font-weight: 500;
 }
 
 @media (min-width: 768px) {
   .place-item__image {
-    height: 20rem;
+    height: 22rem;
   }
 }
