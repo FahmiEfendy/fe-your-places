@@ -14,6 +14,7 @@ import LoadingSpinner from "./shared/components/UIElements/LoadingSpinner";
 const Auth = React.lazy(() => import("./user/pages/Auth"));
 const Users = React.lazy(() => import("./user/pages/Users"));
 const NewPlace = React.lazy(() => import("./places/pages/NewPlace"));
+const AllPlaces = React.lazy(() => import("./places/pages/AllPlaces"));
 const UserPlace = React.lazy(() => import("./places/pages/UserPlace"));
 const UpdatePlace = React.lazy(() => import("./places/pages/UpdatePlace"));
 
@@ -36,7 +37,8 @@ function App() {
           >
             {userToken ? (
               <Routes>
-                <Route path="/" exact element={<Users />} />
+                <Route path="/" exact element={<AllPlaces />} />
+                <Route path="/users" exact element={<Users />} />
                 <Route path="/:userId/places" exact element={<UserPlace />} />
                 <Route path="/place/new" exact element={<NewPlace />} />
                 <Route path="/place/:placeId" exact element={<UpdatePlace />} />
@@ -44,7 +46,8 @@ function App() {
               </Routes>
             ) : (
               <Routes>
-                <Route path="/" exact element={<Users />} />
+                <Route path="/" exact element={<AllPlaces />} />
+                <Route path="/users" exact element={<Users />} />
                 <Route path="/:userId/places" exact element={<UserPlace />} />
                 <Route path="/auth" exact element={<Auth />} />
                 <Route path="*" element={<Navigate to="auth" replace />} />
@@ -56,5 +59,6 @@ function App() {
     </AuthContext.Provider>
   );
 }
+
 
 export default App;

@@ -1,7 +1,17 @@
 .place-list {
   list-style: none;
-  margin: 1rem auto;
+  margin: 2rem auto;
   padding: 0;
-  width: 90%;
-  max-width: 40rem;
+  width: 95%;
+  max-width: 90rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 }
+
+@media (min-width: 900px) {
+  .place-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+

@@ -11,13 +11,19 @@ const NavLinks = () => {
   return (
     <ul className="nav-links">
       <li>
-        <NavLink to="/">ALL USERS</NavLink>
+        <NavLink to="/" end>
+          ALL PLACES
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/users">ALL USERS</NavLink>
       </li>
       {auth.isLogin && (
         <li>
           <NavLink to={`/${auth.userId}/places`}>MY PLACES</NavLink>
         </li>
       )}
+
       {auth.isLogin && (
         <li>
           <NavLink to="/place/new">ADD PLACE</NavLink>

@@ -52,15 +52,52 @@ const PlaceItem = (props) => {
       <Modal
         show={isMapOpen}
         onCancel={closeMapHandler}
-        header={props.address}
+        header={
+          <div className="modal-header__container">
+            <span className="modal-header__title">{props.title}</span>
+            <span className="modal-header__address">{props.address}</span>
+          </div>
+        }
         contentClass="place-item__modal-content"
         footerClass="place-item__modal-actions"
-        footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
+        footer={
+          <React.Fragment>
+            <Button
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                props.address
+              )}`}
+              target="_blank"
+            >
+              VIEW ON GOOGLE MAPS
+            </Button>
+            <Button inverse onClick={closeMapHandler}>
+              CLOSE
+            </Button>
+          </React.Fragment>
+        }
       >
         <div className="map-container">
           <Map center={props.coordinates} zoom={16} />
         </div>
+
+        <div className="place-item__modal-details">
+          <div className="modal-detail__item">
+            <span className="modal-detail__label">Address</span>
+            <p className="modal-detail__value">{props.address}</p>
+          </div>
+          <div className="modal-detail__row">
+            <div className="modal-detail__item">
+              <span className="modal-detail__label">Latitude</span>
+              <p className="modal-detail__value">{props.coordinates.lat.toFixed(6)}</p>
+            </div>
+            <div className="modal-detail__item">
+              <span className="modal-detail__label">Longitude</span>
+              <p className="modal-detail__value">{props.coordinates.lng.toFixed(6)}</p>
+            </div>
+          </div>
+        </div>
       </Modal>
+
       <Modal
         show={isDeleteModalOpen}
         header="Are you sure want to delete this place?"
