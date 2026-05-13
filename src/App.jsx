@@ -8,8 +8,8 @@ import {
 
 import useAuth from "./shared/hooks/auth-hook";
 import { AuthContext } from "./shared/context/auth-context";
+import PageSkeleton from "./shared/components/UIElements/PageSkeleton";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
-import LoadingSpinner from "./shared/components/UIElements/LoadingSpinner";
 
 const Auth = React.lazy(() => import("./user/pages/Auth"));
 const Users = React.lazy(() => import("./user/pages/Users"));
@@ -28,13 +28,8 @@ function App() {
       <Router basename="/your-places">
         <MainNavigation></MainNavigation>
         <main>
-          <Suspense
-            fallback={
-              <div className="center">
-                <LoadingSpinner />
-              </div>
-            }
-          >
+          <Suspense fallback={<PageSkeleton />}>
+
             {userToken ? (
               <Routes>
                 <Route path="/" exact element={<AllPlaces />} />
