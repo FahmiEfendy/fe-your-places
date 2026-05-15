@@ -42,7 +42,19 @@ const MainNavigation = () => {
           <span></span>
         </button>
         <h1 className="main-navigation__title">
-          <Link to="/" onClick={reloadPageHandler}>
+          <Link to="/" onClick={reloadPageHandler} className="main-navigation__logo-link">
+            <svg
+              className="main-navigation__logo-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.152-.722c1.102-.736 2.531-1.839 3.638-3.323C18.41 16.586 20 14.15 20 11a8 8 0 10-16 0c0 3.15 1.59 5.586 2.829 7.245 1.107 1.484 2.536 2.587 3.638 3.323a16.977 16.977 0 001.152.722zM12 15a3 3 0 100-6 3 3 0 000 6z"
+                clipRule="evenodd"
+              />
+            </svg>
             YourPlaces
           </Link>
         </h1>

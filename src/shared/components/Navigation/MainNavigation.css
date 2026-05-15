@@ -1,6 +1,6 @@
 .main-navigation__menu-btn {
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   background: transparent;
   border: none;
   display: flex;
@@ -12,9 +12,9 @@
 
 .main-navigation__menu-btn span {
   display: block;
-  width: 3rem;
+  width: 2.5rem;
   height: 2.5px;
-  background: white;
+  background: var(--text-main);
 }
 
 .main-navigation__title {
@@ -24,10 +24,24 @@
   font-size: 1.75rem;
 }
 
-.main-navigation__title a {
+.main-navigation__logo-link {
   text-decoration: none;
   color: var(--text-main);
-  transition: color 0.2s;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.main-navigation__logo-icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--primary);
+  transition: transform 0.3s ease;
+}
+
+.main-navigation__logo-link:hover .main-navigation__logo-icon {
+  transform: translateY(-3px) scale(1.1);
 }
 
 .main-navigation__title a:hover {
@@ -43,7 +57,7 @@
   height: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .main-navigation__menu-btn {
     display: none;
   }

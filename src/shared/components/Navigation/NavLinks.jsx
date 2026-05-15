@@ -34,7 +34,7 @@ const NavLinks = () => {
       )}
       {!auth.isLogin && (
         <li>
-          <NavLink to="/auth">AUTHENTICATE</NavLink>
+          <NavLink to="/auth">LOGIN</NavLink>
         </li>
       )}
       <li className="theme-toggle">

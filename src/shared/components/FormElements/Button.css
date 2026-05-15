@@ -1,14 +1,15 @@
 .button {
   font: inherit;
   padding: 0.5rem 1.5rem;
-  border: 1px solid #ff0055;
-  border-radius: 4px;
-  background: #ff0055;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  background: var(--primary);
   color: white;
   cursor: pointer;
   margin-right: 1rem;
   text-decoration: none;
   display: inline-block;
+  transition: all 0.2s ease;
 }
 
 .button:focus {
@@ -17,39 +18,46 @@
 
 .button:hover,
 .button:active {
-  background: #ff4382;
-  border-color: #ff4382;
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
 }
 
 .button--inverse {
   background: transparent;
-  color: #ff0055;
+  color: var(--primary);
 }
 
 .button--inverse:hover,
 .button--inverse:active {
   color: white;
-  background: #ff0055;
+  background: var(--primary);
 }
 
 .button--danger {
-  background: #830000;
-  border-color: #830000;
+  background: #ef4444;
+  border-color: #ef4444;
 }
 
 .button--danger:hover,
 .button--danger:active {
-  background: #f34343;
-  border-color: #f34343;
+  background: #dc2626;
+  border-color: #dc2626;
 }
 
 .button:disabled,
 .button:hover:disabled,
 .button:active:disabled {
-  background: #ccc;
-  color: #979797;
-  border-color: #ccc;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
   cursor: not-allowed;
+}
+
+[data-theme="light"] .button:disabled {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 .button--small {
