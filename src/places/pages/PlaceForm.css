@@ -2,10 +2,12 @@
   position: relative;
   list-style: none;
   margin: 0 auto;
-  padding: 1rem;
-  width: 90%;
+  padding: 1.5rem;
+  width: 95%;
   max-width: 40rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 6px;
-  background: white;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
+

@@ -19,8 +19,10 @@
   text-decoration: none;
   padding: 0.5rem 1rem;
   font-weight: 500;
-  transition: color 0.2s, background-color 0.2s;
+  transition: all 0.3s ease;
   border-radius: var(--radius);
+  position: relative;
+  white-space: nowrap;
 }
 
 .nav-links a:hover,
@@ -28,6 +30,23 @@
 .nav-links a.active {
   color: var(--text-main);
   background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.nav-links a.active:hover::after {
+  width: 30px;
 }
 
 .nav-links button {
@@ -53,17 +72,18 @@
   box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .nav-links {
     flex-direction: row;
   }
 
   .nav-links li {
-    margin: 0 0.5rem;
+    margin: 0 0.25rem;
   }
 
   .nav-links a {
     color: var(--text-muted);
+    padding: 0.5rem 0.75rem;
   }
 
   .nav-links a:hover,
