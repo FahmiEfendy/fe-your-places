@@ -30,6 +30,17 @@ const ModalOverlay = (props) => {
 };
 
 const Modal = (props) => {
+  React.useEffect(() => {
+    if (props.show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [props.show]);
+
   return (
     <React.Fragment>
       {props.show && <Backdrop onClick={props.onCancel} />}

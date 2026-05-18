@@ -81,9 +81,29 @@
 }
 
 .place-item__modal-actions {
-  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   padding: 1rem;
   background: var(--card-bg);
+}
+
+.place-item__modal-actions .button {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .place-item__modal-actions {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  .place-item__modal-actions .button {
+    width: auto;
+  }
 }
 
 .place-item__actions button,
@@ -92,23 +112,49 @@
 }
 
 .map-container {
-  height: 25rem;
+  height: 16rem;
   width: 100%;
 }
 
+@media (min-width: 768px) {
+  .map-container {
+    height: 25rem;
+  }
+}
+
 .place-item__modal-details {
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.25rem;
   background: var(--card-bg);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+@media (min-width: 768px) {
+  .place-item__modal-details {
+    padding: 1.5rem 2rem;
+  }
+}
+
 .modal-detail__item {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .modal-detail__item {
+    margin-bottom: 1.25rem;
+  }
 }
 
 .modal-detail__row {
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .modal-detail__row {
+    flex-direction: row;
+    gap: 2rem;
+  }
 }
 
 .modal-detail__label {
