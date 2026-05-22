@@ -6,6 +6,7 @@ import useForm from "../../shared/hooks/form-hook";
 import useHttpRequest from "../../shared/hooks/http-hook";
 import useFetchImage from "../../shared/hooks/image-hook";
 import Card from "../../shared/components/UIElements/Card";
+import { API_BASE_URL } from "../../shared/utils/constants";
 import Input from "../../shared/components/FormElements/Input";
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
@@ -60,10 +61,8 @@ const UpdatePlace = () => {
   useEffect(() => {
     const fetchRequest = async () => {
       try {
-        const apiBaseUrl =
-          import.meta.env.VITE_API_BASE_URL || "/your-places/api";
         const responseData = await sendRequest(
-          `${apiBaseUrl}/places/${placeId}`
+          `${API_BASE_URL}/places/${placeId}`
         );
 
         setSelectedPlace(responseData.data);
@@ -115,9 +114,8 @@ const UpdatePlace = () => {
         }
       }
 
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
       await sendRequest(
-        `${apiBaseUrl}/places/${placeId}`,
+        `${API_BASE_URL}/places/${placeId}`,
         "PATCH",
         {
           Authorization: `Bearer ${auth.userToken}`,

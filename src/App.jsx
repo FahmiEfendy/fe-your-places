@@ -25,7 +25,7 @@ function App() {
     <AuthContext.Provider
       value={{ isLogin: !!userToken, userId, userToken, login, logout }}
     >
-      <Router basename="/your-places">
+      <Router>
         <MainNavigation></MainNavigation>
         <main>
           <Suspense fallback={<PageSkeleton />}>

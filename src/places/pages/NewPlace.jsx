@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./PlaceForm.css";
 import useForm from "../../shared/hooks/form-hook";
 import useHttpRequest from "../../shared/hooks/http-hook";
+import { API_BASE_URL } from "../../shared/utils/constants";
 import Input from "../../shared/components/FormElements/Input";
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
@@ -62,9 +63,8 @@ const NewPlace = () => {
         formData.append("image", formState.inputs.image.value);
       }
 
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
       await sendRequest(
-        `${apiBaseUrl}/places/`,
+        `${API_BASE_URL}/places/`,
         "POST",
         { Authorization: `Bearer ${auth.userToken}` },
         formData

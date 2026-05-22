@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 
 import PlaceList from "../components/PlaceList";
 import useHttpRequest from "../../shared/hooks/http-hook";
+import { API_BASE_URL } from "../../shared/utils/constants";
 import EndOfList from "../../shared/components/UIElements/EndOfList";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import useInfiniteScroll from "../../shared/hooks/infinite-scroll-hook";
@@ -20,8 +21,7 @@ const AllPlaces = () => {
 
   const fetchPlaces = useCallback(async (pageNum) => {
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
-      const responseData = await sendRequest(`${apiBaseUrl}/places?page=${pageNum}&limit=6`);
+      const responseData = await sendRequest(`${API_BASE_URL}/places?page=${pageNum}&limit=6`);
 
       const transformedPlaces = responseData.data.map(place => ({
         ...place,

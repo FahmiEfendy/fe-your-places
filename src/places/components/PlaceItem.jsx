@@ -5,6 +5,7 @@ import Map from "../../shared/components/UIElements/Map";
 import useFetchImage from "../../shared/hooks/image-hook";
 import useHttpRequest from "../../shared/hooks/http-hook";
 import Card from "../../shared/components/UIElements/Card";
+import { API_BASE_URL } from "../../shared/utils/constants";
 import Modal from "../../shared/components/UIElements/Modal";
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
@@ -30,9 +31,8 @@ const PlaceItem = (props) => {
 
   const confirmDeleteHandler = async () => {
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
       await sendRequest(
-        `${apiBaseUrl}/places/${props.id}`,
+        `${API_BASE_URL}/places/${props.id}`,
         "DELETE",
         {
           Authorization: `Bearer ${auth.userToken}`,

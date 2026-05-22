@@ -5,7 +5,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   return {
-    base: '/your-places/',
+    base: '/',
     plugins: [
       react(),
       {
@@ -20,10 +20,10 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 3000,
       proxy: {
-        '/your-places/api': {
+        '/api': {
           target: 'http://localhost:5001',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/your-places\/api/, '/api'),
+          rewrite: (path) => path.replace(/^\/api/, ''),
         },
       }
     }

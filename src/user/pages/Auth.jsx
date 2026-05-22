@@ -5,6 +5,7 @@ import "./Auth.css";
 import useForm from "../../shared/hooks/form-hook";
 import useHttpRequest from "../../shared/hooks/http-hook";
 import Card from "../../shared/components/UIElements/Card";
+import { API_BASE_URL } from "../../shared/utils/constants";
 import Input from "../../shared/components/FormElements/Input";
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
@@ -70,10 +71,8 @@ const Auth = () => {
 
     if (isLoginMode) {
       try {
-        const apiBaseUrl =
-          import.meta.env.VITE_API_BASE_URL || "/your-places/api";
         const responseData = await sendRequest(
-          `${apiBaseUrl}/users/login`,
+          `${API_BASE_URL}/users/login`,
           "POST",
           {
             "Content-Type": "application/json",
@@ -101,9 +100,8 @@ const Auth = () => {
           formData.append("image", formState.inputs.image.value);
         }
 
-        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
         const responseData = await sendRequest(
-          `${apiBaseUrl}/users/signup`,
+          `${API_BASE_URL}/users/signup`,
           "POST",
           {},
           formData

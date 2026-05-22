@@ -9,7 +9,7 @@ RUN npm run build
 # Production stage
 FROM nginx:stable-alpine
 # Copy build files to the subdirectory in nginx to match the base path
-COPY --from=build /app/dist /usr/share/nginx/html/your-places
+COPY --from=build /app/dist /usr/share/nginx/html
 # Add nginx configuration to handle SPA routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80

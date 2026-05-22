@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useCallback } from "react";
 
 import UserList from "../components/UserList";
 import useHttpRequest from "../../shared/hooks/http-hook";
+import { API_BASE_URL } from "../../shared/utils/constants";
 import { AuthContext } from "../../shared/context/auth-context";
 import EndOfList from "../../shared/components/UIElements/EndOfList";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
@@ -18,9 +19,8 @@ const Users = () => {
 
   const fetchUsers = useCallback(async (pageNum) => {
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
       const responseData = await sendRequest(
-        `${apiBaseUrl}/users?page=${pageNum}&limit=6`
+        `${API_BASE_URL}/users?page=${pageNum}&limit=6`
       );
 
       setUserList(prev => pageNum === 1 ? responseData.data : [...prev, ...responseData.data]);

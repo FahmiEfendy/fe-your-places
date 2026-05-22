@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import PlaceList from "../components/PlaceList";
 import useHttpRequest from "../../shared/hooks/http-hook";
+import { API_BASE_URL } from "../../shared/utils/constants";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
@@ -22,9 +23,8 @@ const UserPlace = () => {
   useEffect(() => {
     const fetchRequest = async () => {
       try {
-        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/your-places/api';
         const responseData = await sendRequest(
-          `${apiBaseUrl}/places/user/${userId}`
+          `${API_BASE_URL}/places/user/${userId}`
         );
 
         setUserPlaces(responseData.data.places);
