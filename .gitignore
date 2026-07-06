@@ -1,33 +1,50 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
-/build
-/dist
-
-# misc
-.DS_Store
+# dotenv — track example, ignore real secrets
+.env
 .env.local
+.env.production
+.env.development
+.env.test
 .env.development.local
 .env.test.local
 .env.production.local
+!.env.example
 
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
+# Dependencies
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# (env rules moved to top — .env.example is explicitly tracked)
+
+# Vite / build tools
 .vercel
+.netlify
+.cache
+.parcel-cache
+
+# Testing coverage
+coverage
 
 # Cache
-.npm-cache
-
-# Environment variables
-.env
-.env.prod
+.npm-cache/
