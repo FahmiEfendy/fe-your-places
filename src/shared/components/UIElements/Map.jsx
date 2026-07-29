@@ -15,6 +15,8 @@ const Map = (props) => {
     let intervalId;
 
     const initMap = () => {
+      clearInterval(intervalId);
+
       const map = new window.google.maps.Map(mapRef.current, {
         center: props.center,
         zoom: props.zoom,
@@ -42,9 +44,7 @@ const Map = (props) => {
     };
 
     tryInitMap();
-    if (status !== "ready") {
-      intervalId = setInterval(tryInitMap, SDK_WAIT_INTERVAL_MS);
-    }
+    intervalId = setInterval(tryInitMap, SDK_WAIT_INTERVAL_MS);
 
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
