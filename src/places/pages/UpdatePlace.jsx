@@ -12,6 +12,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
+import useDocumentMeta from "../../shared/hooks/document-meta-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import {
   VALIDATOR_MINLENGTH,
@@ -27,6 +28,13 @@ const UpdatePlace = () => {
 
   const [selectedPlace, setSelectedPlace] = useState();
   const [useImageUrl, setUseImageUrl] = useState(false);
+
+  useDocumentMeta({
+    title: selectedPlace
+      ? `Edit "${selectedPlace.title}" | Your Places`
+      : "Edit Place | Your Places",
+    description: "Update the details of your shared place.",
+  });
 
   const { isLoading, error, sendRequest, clearErrorHandler } = useHttpRequest();
 

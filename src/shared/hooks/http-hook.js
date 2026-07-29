@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { emitUnauthorized } from "../utils/authEvents";
+
 const useHttpRequest = () => {
   const activeHttpRequest = useRef([]);
   const [error, setError] = useState(null);
@@ -26,6 +28,10 @@ const useHttpRequest = () => {
         activeHttpRequest.current = activeHttpRequest.current.filter(
           (reqCtrl) => reqCtrl !== httpAbortCtrl
         );
+
+        if (response.status === 401 && headers.Authorization) {
+          emitUnauthorized();
+        }
 
         if (!response.ok) throw new Error(responseData.message);
 

@@ -11,6 +11,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
+import useDocumentMeta from "../../shared/hooks/document-meta-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import {
   VALIDATOR_EMAIL,
@@ -20,6 +21,11 @@ import {
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
+
+  useDocumentMeta({
+    title: isLoginMode ? "Login | Your Places" : "Sign Up | Your Places",
+    description: "Log in or sign up to share your favorite places.",
+  });
   const [useImageUrl, setUseImageUrl] = useState(false);
   const { isLoading, error, sendRequest, clearErrorHandler } = useHttpRequest();
 
@@ -119,6 +125,11 @@ const Auth = () => {
       <ErrorModal error={error} onClear={clearErrorHandler} />
       <Card className="authentication">
         {isLoading && <LoadingSpinner asOverlay />}
+        {auth.sessionExpired && (
+          <p className="authentication__session-expired">
+            Your session has expired. Please log in again.
+          </p>
+        )}
         <h2>{`${isLoginMode ? "Login" : "SignUp"} Mode`}</h2>
         <hr />
         <form onSubmit={formSubmitHandler}>
@@ -129,7 +140,7 @@ const Auth = () => {
                 type="text"
                 label="Name"
                 errorText="Please enter a valid name!"
-                validators={[VALIDATOR_REQUIRE]}
+                validators={[VALIDATOR_REQUIRE()]}
                 onInput={inputChangeHandler}
               />
               <div className="image-source-toggle">

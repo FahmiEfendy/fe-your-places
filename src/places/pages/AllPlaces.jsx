@@ -6,9 +6,16 @@ import { API_BASE_URL } from "../../shared/utils/constants";
 import EndOfList from "../../shared/components/UIElements/EndOfList";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import useInfiniteScroll from "../../shared/hooks/infinite-scroll-hook";
+import useDocumentMeta from "../../shared/hooks/document-meta-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import { PlaceItemSkeleton } from "../../shared/components/UIElements/Skeletons";
 
 const AllPlaces = () => {
+  useDocumentMeta({
+    title: "All Places | Your Places",
+    description: "Browse all shared places from the Your Places community.",
+  });
+
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadedPlaces, setLoadedPlaces] = useState([]);
@@ -56,7 +63,13 @@ const AllPlaces = () => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearErrorHandler} />
 
-      {loadedPlaces && (
+      {isLoading && page === 1 && loadedPlaces.length === 0 ? (
+        <ul className="place-list">
+          {Array.from({ length: 6 }).map((_, idx) => (
+            <PlaceItemSkeleton key={idx} />
+          ))}
+        </ul>
+      ) : (
         <PlaceList items={loadedPlaces} onDelete={updatePlaceListHandler} />
       )}
 

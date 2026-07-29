@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 
+import { onUnauthorized } from "../utils/authEvents";
+
 let logoutTimer;
 
 const AuthHook = () => {
   const [userId, setUserId] = useState(null);
   const [userToken, setUserToken] = useState(null);
   const [tokenExpirationDateState, setTokenExpirationDateState] = useState();
+  const [sessionExpired, setSessionExpired] = useState(false);
 
   const login = useCallback((id, token, expirationDate) => {
     // Token will expired in 60 minutes and will auto logout
@@ -15,6 +18,7 @@ const AuthHook = () => {
     setUserId(id);
     setUserToken(token);
     setTokenExpirationDateState(tokenExpirationDate);
+    setSessionExpired(false);
 
     localStorage.setItem(
       "userData",
@@ -33,6 +37,18 @@ const AuthHook = () => {
 
     localStorage.removeItem("userData");
   }, []);
+
+  const clearSessionExpired = useCallback(() => {
+    setSessionExpired(false);
+  }, []);
+
+  // Force logout + show a message when any API call comes back 401
+  useEffect(() => {
+    return onUnauthorized(() => {
+      setSessionExpired(true);
+      logout();
+    });
+  }, [logout]);
 
   // Logout when token expired
   useEffect(() => {
@@ -61,7 +77,7 @@ const AuthHook = () => {
     login(id, token, new Date(expirationDate));
   }, [login]);
 
-  return { userId, userToken, login, logout };
+  return { userId, userToken, login, logout, sessionExpired, clearSessionExpired };
 };
 
 export default AuthHook;

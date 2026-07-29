@@ -2,13 +2,6 @@
 
 ## 🔴 Critical
 
-- [ ] **Error boundaries** — Add React error boundary components to prevent white-screen crashes on unexpected errors
-- [ ] **Loading states** — Add skeleton loaders or spinners for all async data fetching (places, users, map)
-- [ ] **404 page** — Create a user-friendly "page not found" component for unknown routes
-- [ ] **Form validation** — Client-side validation on all forms before submission (required fields, file type/size checks)
-- [ ] **Auth token expiry handling** — Detect JWT expiry (401 responses), clear token, and redirect to login with a message
-- [ ] **SEO meta tags** — Add proper `<title>`, `<meta description>`, and Open Graph tags per page
-- [ ] **Content Security Policy** — Configure Nginx to send CSP headers restricting script/style sources
 
 ## 🟡 Medium
 

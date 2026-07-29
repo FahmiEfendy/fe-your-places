@@ -1,25 +1,53 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import "./Map.css";
+import LoadingSpinner from "./LoadingSpinner";
+
+const MAX_SDK_WAIT_ATTEMPTS = 20;
+const SDK_WAIT_INTERVAL_MS = 250;
 
 const Map = (props) => {
   const mapRef = useRef();
+  const [status, setStatus] = useState("loading");
 
   useEffect(() => {
-    if (!window.google || !window.google.maps) {
-      console.error("Google Maps SDK not loaded.");
-      return;
+    let attempts = 0;
+    let intervalId;
+
+    const initMap = () => {
+      const map = new window.google.maps.Map(mapRef.current, {
+        center: props.center,
+        zoom: props.zoom,
+      });
+
+      new window.google.maps.Marker({
+        position: props.center,
+        map: map,
+      });
+
+      setStatus("ready");
+    };
+
+    const tryInitMap = () => {
+      if (window.google && window.google.maps) {
+        initMap();
+        return;
+      }
+
+      attempts += 1;
+      if (attempts >= MAX_SDK_WAIT_ATTEMPTS) {
+        clearInterval(intervalId);
+        setStatus("error");
+      }
+    };
+
+    tryInitMap();
+    if (status !== "ready") {
+      intervalId = setInterval(tryInitMap, SDK_WAIT_INTERVAL_MS);
     }
 
-    const map = new window.google.maps.Map(mapRef.current, {
-      center: props.center,
-      zoom: props.zoom,
-    });
-
-    new window.google.maps.Marker({
-      position: props.center,
-      map: map,
-    });
+    return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.center, props.zoom]);
 
   return (
@@ -27,7 +55,18 @@ const Map = (props) => {
       ref={mapRef}
       className={`map ${props.className}`}
       style={props.style}
-    ></div>
+    >
+      {status === "loading" && (
+        <div className="center" style={{ height: "100%" }}>
+          <LoadingSpinner />
+        </div>
+      )}
+      {status === "error" && (
+        <div className="center" style={{ height: "100%" }}>
+          <p>Unable to load the map. Please try again later.</p>
+        </div>
+      )}
+    </div>
   );
 };
 

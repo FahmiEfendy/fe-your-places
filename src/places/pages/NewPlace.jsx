@@ -10,6 +10,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
+import useDocumentMeta from "../../shared/hooks/document-meta-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import {
   VALIDATOR_MINLENGTH,
@@ -17,6 +18,11 @@ import {
 } from "../../shared/utils/validators";
 
 const NewPlace = () => {
+  useDocumentMeta({
+    title: "Add New Place | Your Places",
+    description: "Share a new favorite location with the Your Places community.",
+  });
+
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const [useImageUrl, setUseImageUrl] = React.useState(false);

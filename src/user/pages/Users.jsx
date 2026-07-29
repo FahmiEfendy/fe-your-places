@@ -7,9 +7,16 @@ import { AuthContext } from "../../shared/context/auth-context";
 import EndOfList from "../../shared/components/UIElements/EndOfList";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import useInfiniteScroll from "../../shared/hooks/infinite-scroll-hook";
+import useDocumentMeta from "../../shared/hooks/document-meta-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import { UserItemSkeleton } from "../../shared/components/UIElements/Skeletons";
 
 const Users = () => {
+  useDocumentMeta({
+    title: "Users | Your Places",
+    description: "Discover other users sharing their favorite places.",
+  });
+
   const auth = useContext(AuthContext);
 
   const [page, setPage] = useState(1);
@@ -50,7 +57,13 @@ const Users = () => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearErrorHandler} />
 
-      {userList && (
+      {isLoading && page === 1 && userList.length === 0 ? (
+        <ul className="users-list">
+          {Array.from({ length: 6 }).map((_, idx) => (
+            <UserItemSkeleton key={idx} />
+          ))}
+        </ul>
+      ) : (
         <UserList items={userList} />
       )}
 
