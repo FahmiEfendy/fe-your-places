@@ -82,15 +82,37 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check build-time env vars
+        id: envcheck
+        run: |
+          declare -A VARS=(
+            [VITE_API_BASE_URL]="${{ vars.VITE_API_BASE_URL }}"
+            [VITE_GOOGLE_API_KEY]="${{ secrets.VITE_GOOGLE_API_KEY }}"
+            [VITE_OPENINARY_URL]="${{ vars.VITE_OPENINARY_URL }}"
+          )
+          SET=0
+          TOTAL=${#VARS[@]}
+          {
+            echo "build_args<<ENVEOF"
+            for key in "${!VARS[@]}"; do
+              echo "$key=${VARS[$key]}"
+              if [ -n "${VARS[$key]}" ]; then
+                SET=$((SET + 1))
+              else
+                echo "::warning::$key is empty — build will bake in a blank value"
+              fi
+            done
+            echo "ENVEOF"
+          } >> "$GITHUB_OUTPUT"
+          echo "### Frontend build-time env" >> "$GITHUB_STEP_SUMMARY"
+          echo "- **Variables set:** $SET / $TOTAL" >> "$GITHUB_STEP_SUMMARY"
+
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          build-args: |
-            VITE_API_BASE_URL=${{ vars.VITE_API_BASE_URL }}
-            VITE_GOOGLE_API_KEY=${{ secrets.VITE_GOOGLE_API_KEY }}
-            VITE_OPENINARY_URL=${{ vars.VITE_OPENINARY_URL }}
+          build-args: ${{ steps.envcheck.outputs.build_args }}
           tags: |
             ghcr.io/fahmiefendy/fe-your-places:latest
             ghcr.io/fahmiefendy/fe-your-places:${{ steps.vars.outputs.sha_short }}
