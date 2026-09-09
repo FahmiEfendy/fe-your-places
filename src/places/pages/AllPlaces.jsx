@@ -40,6 +40,7 @@ const AllPlaces = () => {
 
     } catch (err) {
       console.log(err);
+      setHasMore(false);
     }
   }, [sendRequest]);
 

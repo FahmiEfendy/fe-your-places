@@ -34,6 +34,7 @@ const Users = () => {
       setHasMore(responseData.meta.hasMore);
     } catch (err) {
       console.log(err);
+      setHasMore(false);
     }
   }, [sendRequest]);
 
