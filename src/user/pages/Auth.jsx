@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./Auth.css";
 import useForm from "../../shared/hooks/form-hook";
@@ -20,6 +21,7 @@ import {
 } from "../../shared/utils/validators";
 
 const Auth = () => {
+  const navigate = useNavigate();
   const [isLoginMode, setIsLoginMode] = useState(true);
 
   useDocumentMeta({
@@ -90,6 +92,7 @@ const Auth = () => {
         );
 
         auth.login(responseData.data.userId, responseData.data.token);
+        navigate("/", { replace: true });
       } catch (err) {
         // This catch err can be removed
         console.log(err);
@@ -114,6 +117,7 @@ const Auth = () => {
         );
 
         auth.login(responseData.data.userId, responseData.data.token);
+        navigate("/", { replace: true });
       } catch (err) {
         console.log(err.message);
       }

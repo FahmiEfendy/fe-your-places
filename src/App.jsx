@@ -19,6 +19,7 @@ const NewPlace = React.lazy(() => import("./places/pages/NewPlace"));
 const AllPlaces = React.lazy(() => import("./places/pages/AllPlaces"));
 const UserPlace = React.lazy(() => import("./places/pages/UserPlace"));
 const UpdatePlace = React.lazy(() => import("./places/pages/UpdatePlace"));
+const Profile = React.lazy(() => import("./user/pages/Profile"));
 
 function App() {
   const { userId, userToken, login, logout, sessionExpired, clearSessionExpired } = useAuth();
@@ -48,6 +49,7 @@ function App() {
                   <Route path="/:userId/places" exact element={<UserPlace />} />
                   <Route path="/place/new" exact element={<NewPlace />} />
                   <Route path="/place/:placeId" exact element={<UpdatePlace />} />
+                  <Route path="/profile" exact element={<Profile />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               ) : (
@@ -59,6 +61,7 @@ function App() {
                   {/* Protected paths redirect to /auth (not 404) when the session expires mid-visit */}
                   <Route path="/place/new" element={<Navigate to="/auth" replace />} />
                   <Route path="/place/:placeId" element={<Navigate to="/auth" replace />} />
+                  <Route path="/profile" element={<Navigate to="/auth" replace />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               )}

@@ -4,10 +4,34 @@ import { onUnauthorized } from "../utils/authEvents";
 
 let logoutTimer;
 
+// Read localStorage synchronously so the first render already knows whether
+// the user is logged in — doing this in an effect instead causes a
+// logged-out flash on refresh, which bounces protected routes to /auth.
+const getStoredAuth = () => {
+  try {
+    const raw = localStorage.getItem("userData");
+    if (!raw) return null;
+
+    const { id, token, expirationDate } = JSON.parse(raw);
+    if (!id || !token || !expirationDate) return null;
+
+    const parsedExpirationDate = new Date(expirationDate);
+    if (Number.isNaN(parsedExpirationDate.getTime()) || parsedExpirationDate <= new Date()) {
+      return null;
+    }
+
+    return { id, token, expirationDate: parsedExpirationDate };
+  } catch (err) {
+    return null;
+  }
+};
+
 const AuthHook = () => {
-  const [userId, setUserId] = useState(null);
-  const [userToken, setUserToken] = useState(null);
-  const [tokenExpirationDateState, setTokenExpirationDateState] = useState();
+  const [userId, setUserId] = useState(() => getStoredAuth()?.id ?? null);
+  const [userToken, setUserToken] = useState(() => getStoredAuth()?.token ?? null);
+  const [tokenExpirationDateState, setTokenExpirationDateState] = useState(
+    () => getStoredAuth()?.expirationDate
+  );
   const [sessionExpired, setSessionExpired] = useState(false);
 
   const login = useCallback((id, token, expirationDate) => {
@@ -61,21 +85,6 @@ const AuthHook = () => {
       clearTimeout(logoutTimer);
     }
   }, [logout, tokenExpirationDateState, userToken]);
-
-  // GET LocalStorage value to re-login when page refresh
-  useEffect(() => {
-    // Return if localStorage is empty
-    if (!localStorage.getItem("userData")) return;
-
-    const { id, token, expirationDate } = JSON.parse(
-      localStorage.getItem("userData")
-    );
-
-    // Check if id and token exist and expirationDate > currentDate, if no then return
-    if (!id || !token || !new Date(expirationDate) > new Date()) return;
-
-    login(id, token, new Date(expirationDate));
-  }, [login]);
 
   return { userId, userToken, login, logout, sessionExpired, clearSessionExpired };
 };

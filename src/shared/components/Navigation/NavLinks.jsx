@@ -32,6 +32,11 @@ const NavLinks = () => {
           <NavLink to="/place/new">ADD PLACE</NavLink>
         </li>
       )}
+      {auth.isLogin && (
+        <li>
+          <NavLink to="/profile">PROFILE</NavLink>
+        </li>
+      )}
       {!auth.isLogin && (
         <li>
           <NavLink to="/auth">LOGIN</NavLink>
