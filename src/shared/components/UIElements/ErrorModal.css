@@ -1,0 +1,11 @@
+.error-modal__text {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  color: var(--text-main);
+}
+
+@media (min-width: 768px) {
+  .error-modal__text {
+    padding: 1.5rem 2rem;
+  }
+}

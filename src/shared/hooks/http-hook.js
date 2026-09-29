@@ -33,7 +33,8 @@ const useHttpRequest = () => {
           emitUnauthorized();
         }
 
-        if (!response.ok) throw new Error(responseData.message);
+        if (!response.ok)
+          throw new Error(responseData.error || responseData.message);
 
         setIsLoading(false);
         return responseData;
